@@ -43,7 +43,7 @@ virtualbox.start("Win32", function(error){
 # Troubleshooting
 
 * Make sure that Guest account is enabled on the VM.
-* This library starts VMs headlessly by default. If you're having with executing a command, start the VM with GUI and run observe the screen after executing same command.
+* It starts VMs headlessly by default. If you're having with executing a command, start the VM with GUI and run observe the screen after executing same command.
 * For the "Concurrent guest process limit is reached" error message, only solution I know is to reset the VM.
 
 # Example Uses
