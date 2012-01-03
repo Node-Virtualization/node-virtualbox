@@ -9,7 +9,7 @@ $ npm install virtualbox
 
 # Examples
 
-## Starting and Running a program
+### Starting and Running a program
 
 ```javascript
 var virtualbox = require('virtualbox');
