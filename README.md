@@ -20,7 +20,7 @@ virtualbox.start("Win32", function(error){
 
   console.log('VM "w7" has been successfully started');
 
-  virtualbox.exec({ vm: "win32", cmd: "C:\Program Files\Internet Explorer\iexplore.exe", params: "http://google.com" },  function(error){
+  virtualbox.exec({ vm: "win32", cmd: "C:\\Program Files\\Internet Explorer\\iexplore.exe", params: "http://google.com" },  function(error){
 
     if(error) throw error;
 
@@ -47,5 +47,5 @@ virtualbox.start("Win32", function(error){
 * For the "Concurrent guest process limit is reached" error message, only solution I know is to reset the VM.
 
 # Example Uses
-
+* [tests](https://github.com/azer/node-virtualbox/tree/master/test)
 * [Lowkick](http://github.com/azer/lowkick)
