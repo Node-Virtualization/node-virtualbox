@@ -43,8 +43,8 @@ virtualbox.start("Win32", function(error){
 # Troubleshooting
 
 * Make sure that Guest account is enabled on the VM.
-* It starts VMs headlessly by default. If you're having trouble with executing a command, start the VM with GUI and run observe the screen after executing same command.
-* For the "Concurrent guest process limit is reached" error message, only solution I know is to reset the VM.
+* It starts VMs headlessly by default. If you're having trouble with executing a command, start the VM with GUI and observe the screen after executing same command.
+* For the "Concurrent guest process limit is reached" error message, only solution I know is to reset the VM. Don't mind calling "start" function for an already started VM. 
 
 # Example Uses
 * [tests](https://github.com/azer/node-virtualbox/tree/master/test)
