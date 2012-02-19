@@ -31,6 +31,13 @@ virtualbox.start("Win32", function(error){
 });
 ```
 
+### Executing commands as Administrators
+Pass username and password information within options;
+
+```javascript
+virtualbox.exec({ vm: "ie8", "user":"Administrator", "password": 123456" ...
+```
+
 # Available Methods
 
 * start
