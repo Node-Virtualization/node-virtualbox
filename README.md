@@ -51,7 +51,7 @@ virtualbox.exec({ vm: "ie8", "user":"Administrator", "password": 123456" ...
 
 * Make sure that Guest account is enabled on the VM.
 * It starts VMs headlessly by default. If you're having trouble with executing a command, start the VM with GUI and observe the screen after executing same command.
-* For the "Concurrent guest process limit is reached" error message, only solution I know is to reset the VM. 
+* To avoid having "Concurrent guest process limit is reached" error message, execute your commands as an administrator. 
 
 # Example Uses
 * [tests](https://github.com/azer/node-virtualbox/tree/master/test)
