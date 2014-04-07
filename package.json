@@ -1,13 +1,21 @@
 {
-  "name":"virtualbox",
-  "version":"0.0.4",
-  "description":"A library to interact with VirtualBox.",
-  "author":"Azer Koculu <azer@kodfabrik.com>",
-  "keywords":["virtualbox","vboxmanage"],
-  "directories":{ "lib": "./lib" },
-  "main":"./lib/virtualbox",
-  "repository": { "type":"git",  "url" : "http://github.com/azer/node-virtualbox.git" },
-  "dependencies":{
+  "name": "virtualbox",
+  "version": "0.0.5",
+  "description": "A library to interact with VirtualBox.",
+  "author": "Azer Koculu <azer@kodfabrik.com>",
+  "keywords": [
+    "virtualbox",
+    "vboxmanage"
+  ],
+  "directories": {
+    "lib": "./lib"
+  },
+  "main": "./lib/virtualbox",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/azer/node-virtualbox.git"
+  },
+  "dependencies": {
     "log4js": "0.x"
   }
 }
