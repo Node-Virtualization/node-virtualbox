@@ -1,14 +1,36 @@
 {
   "name": "virtualbox",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A library to interact with VirtualBox.",
   "author": "Azer Koculu <azer@kodfabrik.com>",
+  "contributors": [
+    {
+      "name": "Azer Koculu",
+      "url": "http://azer.bike",
+      "email": "azer@kodfabrik.com"
+    },
+    {
+      "name": "Michael Sanford",
+      "url": "http://michaelsanford.com"
+    },
+    {
+      "name": "Steffen Roegner",
+      "url": "http://www.sroegner.org"
+    },
+    {
+      "name": "Jakub Lekstan",
+      "url": "https://github.com/kuebk"
+    }
+  ],
   "keywords": [
     "virtualbox",
     "vboxmanage"
   ],
   "directories": {
     "lib": "./lib"
+  },
+  "scripts": {
+    "test": "jshint ./lib ./test"
   },
   "main": "./lib/virtualbox",
   "repository": {
@@ -17,5 +39,11 @@
   },
   "dependencies": {
     "log4js": "0.x"
+  },
+  "devDependencies": {
+    "nodeunit": "^0.8.6"
+  },
+  "engines": {
+    "engine": "node >= 0.4.1"
   }
 }
