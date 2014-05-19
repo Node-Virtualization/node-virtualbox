@@ -14,38 +14,48 @@ $ npm install virtualbox
 ```javascript
 var virtualbox = require('virtualbox');
 
-virtualbox.start("Win32", function(error){
+virtualbox.start("Win32", function (error) {
 
-  if(error) throw error;
+    if (error) throw error;
 
-  console.log('VM "w7" has been successfully started');
+    console.log('VM "w7" has been successfully started');
 
-  virtualbox.exec({ vm: "win32", cmd: "C:\\Program Files\\Internet Explorer\\iexplore.exe", params: "http://google.com" },  function(error){
+    virtualbox.exec({
+        vm: "win32",
+        cmd: "C:\\Program Files\\Internet Explorer\\iexplore.exe",
+        params: "http://google.com"
+    }, function (error) {
 
-    if(error) throw error;
+        if (error) throw error;
+        console.log('Running Internet Explorer...');
 
-    console.log('Running Internet Explorer...');
-
-  });
+    });
 
 });
 ```
 
 ### Executing commands as Administrators
-Pass username and password information within options;
+Pass username and password information in an `options` object.
 
 ```javascript
-virtualbox.exec({ vm: "ie8", "user":"Administrator", "password": 123456" ...
+virtualbox.exec({ vm: "ie8", "user":"Administrator", "password": "123456", ...});
 ```
 
 # Available Methods
 
-* start
-* stop
-* exec
-* reset
-* pause
-* resume
+  - `pause`
+  - `reset`
+  - `resume`
+  - `start`
+  - `stop`
+  - `savestate`
+  - `poweroff`
+  - `acpisleepbutton`
+  - `acpipowerbutton`
+  - `guestproperty`
+  - `exec`
+  - `kill`
+  - `list`
 
 # Troubleshooting
 
