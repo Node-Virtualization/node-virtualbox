@@ -1,5 +1,4 @@
 # node-virtualbox
-[![NPM](https://nodei.co/npm/virtualbox.png?downloads=true&stars=true)](https://nodei.co/npm/virtualbox/)
 
 A JavaScript library to interact with [VirtualBox](https://www.virtualbox.org/) virtual machines.
 
