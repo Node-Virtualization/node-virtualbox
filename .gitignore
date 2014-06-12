@@ -1,1 +1,55 @@
+######################
+# OS-generated files
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+######################
+# IDE & Tools files
+######################
+# IntelliJ IDEA, WebStorm, phpStorm
+.idea/
+*.iml
+*.iws
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# vi buffers
+*~
+*.swp
+*.swo
+
+# Emacs buffers
+\#*
+.\#*
+
+# TextMate
+*.tmproj
+tmtags
+
+# Build & testing tools
 node_modules
+.vagrant
+
+######################
+# Logs and databases
+######################
+*.log
+*.sql
+*.sqlite
+
+######################
+# Projects checked out to this root
+######################
