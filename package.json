@@ -1,6 +1,6 @@
 {
   "name": "virtualbox",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A library to interact with VirtualBox.",
   "author": "Azer Koculu <azer@kodfabrik.com>",
   "contributors": [
@@ -24,11 +24,16 @@
     {
       "name": "Christopher'chief' Najewicz",
       "url": "http://chiefy.github.io"
-    }
+    },
+	{
+	  "name": "Cédric Belin",
+	  "url": "http://belin.io"
+	}
   ],
   "keywords": [
     "virtualbox",
-    "vboxmanage"
+    "vboxmanage",
+	"vboxheadless"
   ],
   "directories": {
     "lib": "./lib"
