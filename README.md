@@ -87,7 +87,7 @@ virtualbox.savestate("machine_name", function (error) {
 
 And, in the same family, `acpisleepbutton`:
 ```javascript
-virtualbox.savestate("machine_name", function (error) {
+virtualbox.acpisleepbutton("machine_name", function (error) {
   if (error) throw error;
   console.log("Virtual Machine's ACPI sleep button signal was sent.");
 });
