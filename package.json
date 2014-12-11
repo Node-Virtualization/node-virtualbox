@@ -3,6 +3,13 @@
   "version": "0.1.1",
   "description": "A library to interact with VirtualBox.",
   "author": "Azer Koculu <azer@kodfabrik.com>",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://raw.githubusercontent.com/azer/node-virtualbox/master/LICENSE"
+    }
+  ],
+  "bugs": "https://github.com/azer/node-virtualbox/issues",
   "contributors": [
     {
       "name": "Azer Koculu",
@@ -20,7 +27,7 @@
     {
       "name": "Jakub Lekstan",
       "url": "https://github.com/kuebk"
-    }, 
+    },
     {
       "name": "Christopher'chief' Najewicz",
       "url": "http://chiefy.github.io"
