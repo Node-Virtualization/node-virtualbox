@@ -240,7 +240,7 @@ virtualbox.start("machine_name", function start_callback(error) {
  - Make sure your linux guest can `sudo` with `NOPASSWD` (at least for now).
  - VMs start headlessly by default: if you're having trouble with executing a command, start the VM with GUI and observe the screen after executing same command.
  - To avoid having "Concurrent guest process limit is reached" error message, execute your commands as an administrator.
- - Don't forget that this whole thing is asynchronous, and depends on the return of `vboxmanage` *not* the actual running state/runlevel of services within the guest. See https://github.com/azer/node-virtualbox/issues/9
+ - Don't forget that this whole thing is asynchronous, and depends on the return of `vboxmanage` *not* the actual running state/runlevel of services within the guest. See https://github.com/Node-Virtualization/node-virtualbox/issues/9
 
 # More Examples
-* [npm tests](https://github.com/azer/node-virtualbox/tree/master/test)
+* [npm tests](https://github.com/Node-Virtualization/node-virtualbox/tree/master/test)

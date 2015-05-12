@@ -1,15 +1,15 @@
 {
   "name": "virtualbox",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A library to interact with VirtualBox.",
   "author": "Azer Koculu <azer@kodfabrik.com>",
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://raw.githubusercontent.com/azer/node-virtualbox/master/LICENSE"
+      "url": "https://raw.githubusercontent.com/Node-Virtualization/node-virtualbox/master/LICENSE"
     }
   ],
-  "bugs": "https://github.com/azer/node-virtualbox/issues",
+  "bugs": "https://github.com/Node-Virtualization/node-virtualbox/issues",
   "contributors": [
     {
       "name": "Azer Koculu",
@@ -51,7 +51,7 @@
   "main": "./lib/virtualbox",
   "repository": {
     "type": "git",
-    "url": "http://github.com/azer/node-virtualbox.git"
+    "url": "https://github.com/Node-Virtualization/node-virtualbox.git"
   },
   "dependencies": {
     "log4js": "0.x"
