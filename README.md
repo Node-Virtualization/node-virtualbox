@@ -17,7 +17,7 @@ var virtualbox = require('virtualbox');
 
 The general formula for commands is:
 
-> virtualbox. **API command** ( "**registered vm name**", **callback** );
+> virtualbox. **API command** ( "**registered vm name**", **[parameters]**, **callback** );
 
 Available API commands are listed at the end of this document.
 
@@ -29,7 +29,7 @@ node-virtualbox provides convenience methods to command the guest machine's powe
 Virtual machines will *start headless by default*, but you can pass a boolean parameter to start them with a GUI:
 
 ```javascript
-virtualbox.start("machine_name", true, function (error) {
+virtualbox.start("machine_name", true, function start_callback(error) {
   if (error) throw error;
   console.log("Virtual Machine has started WITH A GUI!");
 });
@@ -38,7 +38,7 @@ virtualbox.start("machine_name", true, function (error) {
 
 So as not to break pre-0.1.0 implementations, the old method still works (which also defaults to headless):
 ```javascript
-virtualbox.start("machine_name", function (error) {
+virtualbox.start("machine_name", function start_callback(error) {
   if (error) throw error;
   console.log("Virtual Machine has started HEADLESS!");
 });
@@ -47,7 +47,7 @@ virtualbox.start("machine_name", function (error) {
 ## Stopping a machine
 :warning: **Note:** For historical reasons, `.stop` is an alias to `.savestate`.
 ```javascript
-virtualbox.stop("machine_name", function (error) {
+virtualbox.stop("machine_name", function stop_callback(error) {
   if (error) throw error;
   console.log("Virtual Machine has been saved");
 });
@@ -56,14 +56,14 @@ virtualbox.stop("machine_name", function (error) {
 
 To halt a machine completely, you can use `poweroff` or `acpipowerbutton`:
 ```javascript
-virtualbox.poweroff("machine_name", function (error) {
+virtualbox.poweroff("machine_name", function poweroff_callback(error) {
   if (error) throw error;
   console.log("Virtual Machine has been powered off!");
 });
 ```
 
 ```javascript
-virtualbox.acpipowerbutton("machine_name", function (error) {
+virtualbox.acpipowerbutton("machine_name", function acpipower_callback(error) {
   if (error) throw error;
   console.log("Virtual Machine's ACPI power button was pressed.");
 });
@@ -72,14 +72,14 @@ virtualbox.acpipowerbutton("machine_name", function (error) {
 ## Pausing, Saving and Resuming a machine
 Noting the caveat above that `.stop` is actually an alias to `.savestate`...
 ```javascript
-virtualbox.pause("machine_name", function (error) {
+virtualbox.pause("machine_name", function pause_callback(error) {
   if (error) throw error;
   console.log("Virtual Machine is now paused!");
 });
 ```
 
 ```javascript
-virtualbox.savestate("machine_name", function (error) {
+virtualbox.savestate("machine_name", function save_callback(error) {
   if (error) throw error;
   console.log("Virtual Machine is now paused!");
 });
@@ -87,7 +87,7 @@ virtualbox.savestate("machine_name", function (error) {
 
 And, in the same family, `acpisleepbutton`:
 ```javascript
-virtualbox.acpisleepbutton("machine_name", function (error) {
+virtualbox.acpisleepbutton("machine_name", function acpisleep_callback(error) {
   if (error) throw error;
   console.log("Virtual Machine's ACPI sleep button signal was sent.");
 });
@@ -95,7 +95,7 @@ virtualbox.acpisleepbutton("machine_name", function (error) {
 
 Note that you should probably *resume* a machine which is in one of the above three states.
 ```javascript
-virtualbox.resume("machine_name", function (error) {
+virtualbox.resume("machine_name", function resume_callback(error) {
   if (error) throw error;
   console.log("Virtual Machine is now paused!");
 });
@@ -103,7 +103,7 @@ virtualbox.resume("machine_name", function (error) {
 
 And, of course, a reset button method:
 ```javascript
-virtualbox.reset("machine_name", function (error) {
+virtualbox.reset("machine_name", function reset_callback(error) {
   if (error) throw error;
   console.log("Virtual Machine's reset button was pressed!");
 });
@@ -120,7 +120,7 @@ var options = {
   params: "https://google.com"
 }
 
-virtualbox.exec(options, function (error) {
+virtualbox.exec(options, function exec_callback(error) {
     if (error) throw error;
     console.log('Started Internet Explorer...');
 });
@@ -145,16 +145,33 @@ Tasks can be killed in the guest as well. In Windows guests this calls `taskkill
 virtualbox.kill({
     vm: "machine_name",
     cmd: "iexplore.exe"
-}, function (error) {
+}, function kill_callback(error) {
     if (error) throw error;
     console.log('Terminated Internet Explorer.');
+});
+```
+
+## Sending keystrokes to a virtual machine
+Keyboard scan code sequences can be piped directly to a virtual machine's console:
+```javascript
+var SCAN_CODES = virtualbox.SCAN_CODES;
+var sequence = [
+  { key: 'SHIFT', type: 'make',  code: SCAN_CODES['SHIFT']},
+  { key: 'A',     type: 'make',  code: SCAN_CODES['A']},
+  { key: 'SHIFT', type: 'break', code: SCAN_CODES.getBreakCode('SHIFT')},
+  { key: 'A',     type: 'break', code: SCAN_CODES.getBreakCode('A')}
+];
+
+virtualbox.keyboardputscancode("machine_name", sequence, function keyscan_callback(err) {
+    if (error) throw error;
+    console.log('Sent SHIFT A');
 });
 ```
 
 # Meta information about machine
 List all registered machines, returns an array:
 ```javascript
-virtualbox.list(function (machines, error) {
+virtualbox.list(function list_callback(machines, error) {
   if (error) throw error;
   // Act on machines
 });
@@ -167,18 +184,18 @@ var options = {
   key: "/VirtualBox/GuestInfo/Net/0/V4/IP"
 }
 
-virtualbox.guestproperty(function (machines, error) {
+virtualbox.guestproperty(function guestproperty_callback(machines, error) {
   if (error) throw error;
   // Act on machines
 });
 ```
 
-# Puttig it all together
+# Putting it all together
 
 ```javascript
 var virtualbox = require('virtualbox');
 
-virtualbox.start("machine_name", function (error) {
+virtualbox.start("machine_name", function start_callback(error) {
 
     if (error) throw error;
 
@@ -213,6 +230,7 @@ virtualbox.start("machine_name", function (error) {
   - `.guestproperty({vm:"machine_name", property: "propname"}, callback)`
   - `.exec(){vm: "machine_name", cmd: "C:\\Program Files\\Internet Explorer\\iexplore.exe", params: "http://google.com"}, callback)`
   - `.exec(){vm: "machine_name", user:"Administrator", password: "123456", cmd: "C:\\Program Files\\Internet Explorer\\iexplore.exe", params: "http://google.com"}, callback)`
+  - `.keyboardputscancode("machine_name", [scan_codes], callback)`
   - `.kill({vm:"machine_name"}, callback)`
   - `.list(callback)`
 
