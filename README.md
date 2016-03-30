@@ -244,3 +244,11 @@ virtualbox.start("machine_name", function start_callback(error) {
 
 # More Examples
 * [npm tests](https://github.com/Node-Virtualization/node-virtualbox/tree/master/test)
+
+# License
+MIT
+
+# Contributing
+Please do! [Fork](https://github.com/Node-Virtualization/node-virtualbox#fork-destination-box) and send a pull request.
+
+Please abide by the [Contributor Code of Conduct](https://github.com/Node-Virtualization/node-virtualbox/blob/master/code_of_conduct.md).
