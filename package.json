@@ -1,14 +1,9 @@
 {
   "name": "virtualbox",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A library to interact with VirtualBox.",
   "author": "Azer Koculu <azer@kodfabrik.com>",
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://raw.githubusercontent.com/Node-Virtualization/node-virtualbox/master/LICENSE"
-    }
-  ],
+  "license": "MIT",
   "bugs": "https://github.com/Node-Virtualization/node-virtualbox/issues",
   "contributors": [
     {
@@ -18,7 +13,7 @@
     },
     {
       "name": "Michael Sanford",
-      "url": "http://michaelsanford.com"
+      "url": "http://accidentalbeard.com"
     },
     {
       "name": "Steffen Roegner",
