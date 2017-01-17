@@ -141,6 +141,47 @@ virtualbox.reset("machine_name", function reset_callback(error) {
 });
 ```
 
+## Snapshot Manage
+
+You can show snapshot list with `snapshotList` method:
+
+```javascript
+virtualbox.snapshotList("machine_name", function(error, snapshotList, currentSnapshotUUID) {
+  if(error) throw error;
+  if(snapshotList) {
+    console.log(JSON.stringify(snapshotList), JSON.stringify(currentSnapshotUUID));
+  }
+});
+```
+
+And, you can take a snapshot:
+
+```javascript
+virtualbox.snapshotTake("machine_name", "snapshot_name", function(error, uuid) {
+  if (error) throw error;
+	console.log('Snapshot has been taken!');
+	console.log('UUID: ', uuid);
+});
+```
+
+Or, delete a snapshot:
+
+```javascript
+virtualbox.snapshotDelete("machine_name", "snapshot_name", function(error) {
+  if (error) throw error;
+	console.log('Snapshot has been deleted!');
+});
+```
+
+Or, restore a snapshot:
+
+```javascript
+virtualbox.snapshotRestore("machine_name", "snapshot_name", function(error) {
+  if (error) throw error;
+	console.log('Snapshot has been restored!');
+});
+```
+
 # Controlling the guest OS
 
 ## A note about security :warning:
@@ -286,6 +327,11 @@ virtualbox.start("machine_name", function start_callback(error) {
 - `.keyboardputscancode("machine_name", [scan_codes], callback)`
 - `.kill({vm:"machine_name"}, callback)`
 - `.list(callback)`
+- `.isRunning({vm:"machine_name"}, callback)`
+- `.snapshotList({vm:"machine_name"}, callback)`
+- `.snapshotTake({vm:"machine_name"}, {vm:"snapshot_name"},  callback)`
+- `.snapshotDelete({vm:"machine_name"}, {vm:"snapshot_UUID"}, callback)`
+- `.snapshotRestore({vm:"machine_name"}, {vm:"snapshot_UUID"}, callback)`
 
 # Troubleshooting
 
