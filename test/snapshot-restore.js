@@ -7,4 +7,4 @@ var virtualbox = require('../lib/virtualbox'),
 virtualbox.snapshotRestore(vm, uuid, (error) => {
   if (error) throw error;
   console.log("Virtual machine has been restored");
-})
+});
