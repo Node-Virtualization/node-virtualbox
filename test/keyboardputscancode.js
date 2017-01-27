@@ -5,8 +5,8 @@ var virtualbox = require('../lib/virtualbox'),
     args       = process.argv.slice(2),
     vm         = args[0],
     key        = args.length > 1 && args[1],
-    sequence   = undefined,
-    delay      = 250;
+    delay      = 250,
+    sequence;
 
 var SCAN_CODES = virtualbox.SCAN_CODES;
 
