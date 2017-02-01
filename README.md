@@ -1,7 +1,7 @@
 # node-virtualbox
 
 ![NPM version](https://badge.fury.io/js/virtualbox.svg)
-![david-dm badge](https://david-dm.org/Node-Virtualization/node-virtualbox/status.svg)
+[![david-dm badge](https://david-dm.org/Node-Virtualization/node-virtualbox/status.svg)](https://github.com/Node-Virtualization/node-virtualbox/blob/master/package.json)
 [![Build Status](https://travis-ci.org/Node-Virtualization/node-virtualbox.svg?branch=master)](https://travis-ci.org/Node-Virtualization/node-virtualbox)
 
 A JavaScript library to interact with [VirtualBox](https://www.virtualbox.org/) virtual machines.
