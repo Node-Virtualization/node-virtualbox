@@ -142,6 +142,18 @@ virtualbox.reset("machine_name", function reset_callback(error) {
 });
 ```
 
+
+## Export a machine
+
+You can export with `export` method:
+
+```javascript
+virtualbox.export("machine_name", "output", function export_callback(error) {
+  if(error) throw error;
+  console.log("Virtual Machine was exported!");
+});
+```
+
 ## Snapshot Manage
 
 You can show snapshot list with `snapshotList` method:
@@ -319,6 +331,7 @@ virtualbox.start("machine_name", function start_callback(error) {
 - `.start({vm:"machine_name"}, callback)` and `.start({vm:"machine_name"}, true, callback)`
 - `.stop({vm:"machine_name"}, callback)`
 - `.savestate({vm:"machine_name"}, callback)`
+- `.export({vm:"machine_name"}, {output: "output"}, callback)`
 - `.poweroff({vm:"machine_name"}, callback)`
 - `.acpisleepbutton({vm:"machine_name"}, callback)`
 - `.acpipowerbutton({vm:"machine_name"}, callback)`
