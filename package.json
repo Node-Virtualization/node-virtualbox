@@ -1,6 +1,6 @@
 {
   "name": "virtualbox",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "A library to interact with VirtualBox.",
   "author": "Azer Koculu <azer@kodfabrik.com>",
   "license": "MIT",
@@ -30,6 +30,18 @@
     {
       "name": "Cédric Belin",
       "url": "http://belin.io"
+    },
+    {
+      "name": "bschaepper",
+      "url": "https://github.com/bschaepper"
+    },
+    {
+      "name": "2roy999",
+      "url": "https://github.com/2roy999"
+    },
+    {
+      "name": "Felipe Miranda",
+      "url": "https://github.com/felipemdrs"
     }
   ],
   "keywords": [
