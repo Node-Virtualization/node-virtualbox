@@ -53,3 +53,5 @@ node_modules
 ######################
 # Projects checked out to this root
 ######################
+
+\.vscode/
