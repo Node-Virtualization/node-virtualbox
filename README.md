@@ -296,6 +296,35 @@ virtualbox.guestproperty(function guestproperty_callback(machines, error) {
 });
 ```
 
+Obtaining an extra property by key name:
+
+```javascript
+var options = {
+  vm: "machine_name",
+  key: "GUI/Fullscreen"
+}
+
+virtualbox.extradata.get(options, function extradataget_callback(error, value) {
+  if (error) throw error;
+  console.log('Virtual Machine "%s" extra "%s" value is "%s"', options.vm, options.key, value);
+});
+```
+
+Writing an extra property by key name:
+
+```javascript
+var options = {
+  vm: "machine_name",
+  key: "GUI/Fullscreen",
+  value: "true"
+}
+
+virtualbox.extradata.set(options, function extradataset_callback(error) {
+  if (error) throw error;
+  console.log('Set Virtual Machine "%s" extra "%s" value to "%s"', options.vm, options.key, options.value);
+});
+```
+
 # Putting it all together
 
 ```javascript
@@ -346,6 +375,8 @@ virtualbox.start("machine_name", function start_callback(error) {
 - `.snapshotTake({vm:"machine_name"}, {vm:"snapshot_name"},  callback)`
 - `.snapshotDelete({vm:"machine_name"}, {vm:"snapshot_UUID"}, callback)`
 - `.snapshotRestore({vm:"machine_name"}, {vm:"snapshot_UUID"}, callback)`
+- `.extradata.get({vm:"machine_name", key:"keyname"}, callback)`
+- `.extradata.set({vm:"machine_name", key:"keyname", value:"val"}, callback)`
 
 # Troubleshooting
 
