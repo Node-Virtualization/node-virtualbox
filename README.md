@@ -218,7 +218,7 @@ var options = {
   params: "https://google.com"
 }
 
-virtualbox.exec(options, function exec_callback(error) {
+virtualbox.exec(options, function exec_callback(error, stdout) {
     if (error) throw error;
     console.log('Started Internet Explorer...');
 });
