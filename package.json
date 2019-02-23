@@ -61,7 +61,7 @@
     "url": "https://github.com/Node-Virtualization/node-virtualbox.git"
   },
   "dependencies": {
-    "log4js": "1.x"
+    "log4js": "^4.0.2"
   },
   "devDependencies": {
     "async": "^2.1.4",
