@@ -69,7 +69,7 @@
   },
   "devDependencies": {
     "async": "^2.1.4",
-    "jshint": "^2.9.6"
+    "jshint": "^2.10.2"
   },
   "engines": {
     "engine": "node >= 0.4.1"
