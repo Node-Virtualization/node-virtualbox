@@ -1,6 +1,6 @@
 {
   "name": "virtualbox",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A library to interact with VirtualBox.",
   "author": "Azer Koculu <azer@kodfabrik.com>",
   "license": "MIT",
