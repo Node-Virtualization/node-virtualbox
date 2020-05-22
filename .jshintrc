@@ -1,5 +1,6 @@
 {
   // Settings
+  "esversion"     : 6,
   "passfail"      : false,  // Stop on first error.
   "maxerr"        : 100,    // Maximum errors before stopping.
 
