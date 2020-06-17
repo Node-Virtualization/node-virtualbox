@@ -7,9 +7,10 @@ node_js:
   - "12"
   - "11"
   - "10"
- before_install:
-  - npm install -g jshint
+before_install:
+  - npm install -g jshint jest
 install:
   - npm install
 script:
   - npm test
+  - npm lint
