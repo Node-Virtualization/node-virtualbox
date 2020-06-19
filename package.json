@@ -57,7 +57,8 @@
     "lib": "./lib"
   },
   "scripts": {
-    "test": "jshint ./lib ./test"
+    "test": "jest ./test/*.spec.js",
+    "lint": "jshint ./lib ./test"
   },
   "main": "./lib/virtualbox",
   "repository": {
@@ -69,6 +70,7 @@
   },
   "devDependencies": {
     "async": "^2.1.4",
+    "jest": "^26.0.1",
     "jshint": "^2.10.2"
   },
   "engines": {

@@ -21,7 +21,12 @@
   "predef"        : [  // Extra globals.
     "require",
     "define",
-    "notify"
+    "notify",
+    "expect",
+    "it",
+    "afterEach",
+    "describe",
+    "jest"
   ],
 
 
