@@ -197,6 +197,31 @@ virtualbox.snapshotRestore("machine_name", "snapshot_name", function(error) {
 });
 ```
 
+## Cloning VMs
+
+Make a full clone (duplicate virtual hard drive) of a machine:
+
+```javascript
+virtualbox.clone("source_machine_name", "new_machine_name", function(error) {
+  if (error) throw error;
+	console.log('Done fully cloning the virtual machine!');
+});
+```
+
+Make a linked clone (interdependent-differentially stored virtual hard drive) of a machine:
+
+```javascript
+virtualbox.snapshotTake("machine_name", "snapshot_name", function(error, uuid) {
+  if (error) throw error;
+	console.log('Snapshot has been taken!');
+	console.log('UUID: ', uuid);
+	virtualbox.clone("machine_name", "new_machine_name", "snapshot_name", function(error) {
+  		if (error) throw error;
+		console.log('Done making a linked clone of the virtual machine!');
+	});
+});
+```
+
 # Controlling the guest OS
 
 ## A note about security :warning:
@@ -377,6 +402,7 @@ virtualbox.start("machine_name", function start_callback(error) {
 - `.snapshotTake({vm:"machine_name"}, {vm:"snapshot_name"},  callback)`
 - `.snapshotDelete({vm:"machine_name"}, {vm:"snapshot_UUID"}, callback)`
 - `.snapshotRestore({vm:"machine_name"}, {vm:"snapshot_UUID"}, callback)`
+- `.clone({vm:"machine_name"}, {vm:"new_machine_name"}, callback)`
 - `.extradata.get({vm:"machine_name", key:"keyname"}, callback)`
 - `.extradata.set({vm:"machine_name", key:"keyname", value:"val"}, callback)`
 
