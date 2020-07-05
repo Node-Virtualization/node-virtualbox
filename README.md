@@ -252,9 +252,9 @@ Mount an ISO file to the added controller:
 virtualbox.storage.attach({
 	vm: "machine_name",
 	device_name: "IDE", //optional
-	port: "ide", //optional
-	device: "0",
-	type: "0",
+	port: "0", //optional
+	device: "0", //optional
+	type: "dvddrive", //optional
 	medium: "X:\Folder\containing\the.iso"
 }, function(){
 	console.log('Image has been mounted!');
