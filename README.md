@@ -237,7 +237,7 @@ In case the VM doesn't have an IDE controller you can use the storagectl command
 ```javascript
 virtualbox.storage.addCtl({
 	vm: "machine_name",
-	device_name: "IDE", //optional
+	perhiperal_name: "IDE", //optional
 	type: "ide" //optional
 }, function(){
 	console.log('Controller has been added!');
@@ -251,7 +251,7 @@ Mount an ISO file to the added controller:
 ```javascript
 virtualbox.storage.attach({
 	vm: "machine_name",
-	device_name: "IDE", //optional
+	perhiperal_name: "IDE", //optional
 	port: "0", //optional
 	device: "0", //optional
 	type: "dvddrive", //optional
