@@ -358,7 +358,7 @@ var options = {
   key: "/VirtualBox/GuestInfo/Net/0/V4/IP"
 }
 
-virtualbox.guestproperty(function guestproperty_callback(machines, error) {
+virtualbox.guestproperty.get(function guestproperty_callback(machines, error) {
   if (error) throw error;
   // Act on machines
 });
@@ -432,7 +432,7 @@ virtualbox.start("machine_name", function start_callback(error) {
 - `.poweroff({vm:"machine_name"}, callback)`
 - `.acpisleepbutton({vm:"machine_name"}, callback)`
 - `.acpipowerbutton({vm:"machine_name"}, callback)`
-- `.guestproperty({vm:"machine_name", property: "propname"}, callback)`
+- `.guestproperty.get({vm:"machine_name", property: "propname"}, callback)`
 - `.exec(){vm: "machine_name", cmd: "C:\\Program Files\\Internet Explorer\\iexplore.exe", params: "http://google.com"}, callback)`
 - `.exec(){vm: "machine_name", user:"Administrator", password: "123456", cmd: "C:\\Program Files\\Internet Explorer\\iexplore.exe", params: "http://google.com"}, callback)`
 - `.keyboardputscancode("machine_name", [scan_codes], callback)`
@@ -444,6 +444,9 @@ virtualbox.start("machine_name", function start_callback(error) {
 - `.snapshotDelete({vm:"machine_name"}, {vm:"snapshot_UUID"}, callback)`
 - `.snapshotRestore({vm:"machine_name"}, {vm:"snapshot_UUID"}, callback)`
 - `.clone({vm:"machine_name"}, {vm:"new_machine_name"}, callback)`
+- `.clone({vm:"machine_name"}, {vm:"new_machine_name"}, callback)`
+- `.storage.addCtl({vm: "machine_name", perhiperal_name: "IDE", type: "ide"}, callback)`
+- `.storage.attach({vm: "machine_name", perhiperal_name: "IDE", port: "0", device: "0", type: "dvddrive", medium: "X:\Folder\containing\the.iso"}, callback)`
 - `.extradata.get({vm:"machine_name", key:"keyname"}, callback)`
 - `.extradata.set({vm:"machine_name", key:"keyname", value:"val"}, callback)`
 
