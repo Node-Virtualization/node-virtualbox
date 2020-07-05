@@ -14,6 +14,12 @@ A JavaScript library to interact with [VirtualBox](https://www.virtualbox.org/) 
 	- [Starting a cold machine: Two ways](#starting-a-cold-machine-two-ways)
 	- [Stopping a machine](#stopping-a-machine)
 	- [Pausing, Saving and Resuming a machine](#pausing-saving-and-resuming-a-machine)
+- [Export a Machine](#export-a-machine)
+- [Snapshot Manage](#snapshot-manage)
+- [Cloning a VM](#cloning-vms)
+- [Storage](#storage)
+	- [Manage the IDE controller](#manage-the-ide-controller)
+	- [Attach a disk image file](#attach-a-disk-image-file)
 - [Controlling the guest OS](#controlling-the-guest-os)
 	- [A note about security :warning:](#a-note-about-security)
 	- [Running programs in the guest](#running-programs-in-the-guest)
@@ -221,6 +227,41 @@ virtualbox.snapshotTake("machine_name", "snapshot_name", function(error, uuid) {
 	});
 });
 ```
+
+## Storage
+
+### Manage the IDE controller
+
+In case the VM doesn't have an IDE controller you can use the storagectl command to add one:
+
+```javascript
+virtualbox.storage.addCtl({
+	vm: "machine_name",
+	device_name: "IDE", //optional
+	type: "ide" //optional
+}, function(){
+	console.log('Controller has been added!');
+})
+```
+
+### Attach a disk image file
+
+Mount an ISO file to the added controller:
+
+```javascript
+virtualbox.storage.attach({
+	vm: "machine_name",
+	device_name: "IDE", //optional
+	port: "ide", //optional
+	device: "0",
+	type: "0",
+	medium: "X:\Folder\containing\the.iso"
+}, function(){
+	console.log('Image has been mounted!');
+})
+```
+
+The _medium_ parameter of the options object can be set to the **none** value to unmount.
 
 # Controlling the guest OS
 
