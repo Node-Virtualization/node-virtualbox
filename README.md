@@ -317,7 +317,7 @@ var options = {
   key: "/VirtualBox/GuestInfo/Net/0/V4/IP"
 }
 
-virtualbox.guestproperty(function guestproperty_callback(machines, error) {
+virtualbox.guestproperty.get(function guestproperty_callback(machines, error) {
   if (error) throw error;
   // Act on machines
 });
@@ -351,6 +351,8 @@ virtualbox.extradata.set(options, function extradataset_callback(error) {
   console.log('Set Virtual Machine "%s" extra "%s" value to "%s"', options.vm, options.key, options.value);
 });
 ```
+
+_Note: some properties are only available/effective if the Guest OS has the (https://www.virtualbox.org/manual/ch04.html)[Guest Additions] installed and running._
 
 # Putting it all together
 
