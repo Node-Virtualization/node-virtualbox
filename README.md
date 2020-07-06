@@ -14,6 +14,12 @@ A JavaScript library to interact with [VirtualBox](https://www.virtualbox.org/) 
 	- [Starting a cold machine: Two ways](#starting-a-cold-machine-two-ways)
 	- [Stopping a machine](#stopping-a-machine)
 	- [Pausing, Saving and Resuming a machine](#pausing-saving-and-resuming-a-machine)
+- [Export a Machine](#export-a-machine)
+- [Snapshot Manage](#snapshot-manage)
+- [Cloning a VM](#cloning-vms)
+- [Storage](#storage)
+	- [Manage the IDE controller](#manage-the-ide-controller)
+	- [Attach a disk image file](#attach-a-disk-image-file)
 - [Controlling the guest OS](#controlling-the-guest-os)
 	- [A note about security :warning:](#a-note-about-security)
 	- [Running programs in the guest](#running-programs-in-the-guest)
@@ -197,6 +203,66 @@ virtualbox.snapshotRestore("machine_name", "snapshot_name", function(error) {
 });
 ```
 
+## Cloning VMs
+
+Make a full clone (duplicate virtual hard drive) of a machine:
+
+```javascript
+virtualbox.clone("source_machine_name", "new_machine_name", function(error) {
+  if (error) throw error;
+	console.log('Done fully cloning the virtual machine!');
+});
+```
+
+Make a linked clone (interdependent-differentially stored virtual hard drive) of a machine:
+
+```javascript
+virtualbox.snapshotTake("machine_name", "snapshot_name", function(error, uuid) {
+  if (error) throw error;
+	console.log('Snapshot has been taken!');
+	console.log('UUID: ', uuid);
+	virtualbox.clone("machine_name", "new_machine_name", "snapshot_name", function(error) {
+  		if (error) throw error;
+		console.log('Done making a linked clone of the virtual machine!');
+	});
+});
+```
+
+## Storage
+
+### Manage the IDE controller
+
+In case the VM doesn't have an IDE controller you can use the storagectl command to add one:
+
+```javascript
+virtualbox.storage.addCtl({
+	vm: "machine_name",
+	perhiperal_name: "IDE", //optional
+	type: "ide" //optional
+}, function(){
+	console.log('Controller has been added!');
+})
+```
+
+### Attach a disk image file
+
+Mount an ISO file to the added controller:
+
+```javascript
+virtualbox.storage.attach({
+	vm: "machine_name",
+	perhiperal_name: "IDE", //optional
+	port: "0", //optional
+	device: "0", //optional
+	type: "dvddrive", //optional
+	medium: "X:\Folder\containing\the.iso"
+}, function(){
+	console.log('Image has been mounted!');
+})
+```
+
+The _medium_ parameter of the options object can be set to the **none** value to unmount.
+
 # Controlling the guest OS
 
 ## A note about security :warning:
@@ -292,7 +358,7 @@ var options = {
   key: "/VirtualBox/GuestInfo/Net/0/V4/IP"
 }
 
-virtualbox.guestproperty(function guestproperty_callback(machines, error) {
+virtualbox.guestproperty.get(function guestproperty_callback(machines, error) {
   if (error) throw error;
   // Act on machines
 });
@@ -326,6 +392,8 @@ virtualbox.extradata.set(options, function extradataset_callback(error) {
   console.log('Set Virtual Machine "%s" extra "%s" value to "%s"', options.vm, options.key, options.value);
 });
 ```
+
+_Note: some properties are only available/effective if the Guest OS has the (https://www.virtualbox.org/manual/ch04.html)[Guest Additions] installed and running._
 
 # Putting it all together
 
@@ -366,7 +434,7 @@ virtualbox.start("machine_name", function start_callback(error) {
 - `.poweroff({vm:"machine_name"}, callback)`
 - `.acpisleepbutton({vm:"machine_name"}, callback)`
 - `.acpipowerbutton({vm:"machine_name"}, callback)`
-- `.guestproperty({vm:"machine_name", property: "propname"}, callback)`
+- `.guestproperty.get({vm:"machine_name", property: "propname"}, callback)`
 - `.exec(){vm: "machine_name", cmd: "C:\\Program Files\\Internet Explorer\\iexplore.exe", params: "http://google.com"}, callback)`
 - `.exec(){vm: "machine_name", user:"Administrator", password: "123456", cmd: "C:\\Program Files\\Internet Explorer\\iexplore.exe", params: "http://google.com"}, callback)`
 - `.keyboardputscancode("machine_name", [scan_codes], callback)`
@@ -377,6 +445,9 @@ virtualbox.start("machine_name", function start_callback(error) {
 - `.snapshotTake({vm:"machine_name"}, {vm:"snapshot_name"},  callback)`
 - `.snapshotDelete({vm:"machine_name"}, {vm:"snapshot_UUID"}, callback)`
 - `.snapshotRestore({vm:"machine_name"}, {vm:"snapshot_UUID"}, callback)`
+- `.clone({vm:"machine_name"}, {vm:"new_machine_name"}, callback)`
+- `.storage.addCtl({vm: "machine_name", perhiperal_name: "IDE", type: "ide"}, callback)`
+- `.storage.attach({vm: "machine_name", perhiperal_name: "IDE", port: "0", device: "0", type: "dvddrive", medium: "X:\Folder\containing\the.iso"}, callback)`
 - `.extradata.get({vm:"machine_name", key:"keyname"}, callback)`
 - `.extradata.set({vm:"machine_name", key:"keyname", value:"val"}, callback)`
 
