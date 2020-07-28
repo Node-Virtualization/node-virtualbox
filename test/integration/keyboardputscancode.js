@@ -1,25 +1,24 @@
 'use strict';
 
-var virtualbox = require('../lib/virtualbox'),
-    async      = require('async'),
-    args       = process.argv.slice(2),
-    vm         = args[0],
-    key        = args.length > 1 && args[1],
-    delay      = 250,
-    sequence;
+var virtualbox = require('../../lib/virtualbox'),
+  async = require('async'),
+  args = process.argv.slice(2),
+  vm = args[0],
+  key = args.length > 1 && args[1],
+  delay = 250,
+  sequence;
 
 var SCAN_CODES = virtualbox.SCAN_CODES;
 
 var fns = [];
 
-
 /**
-*
-* Uncomment the following if you want to
-* test a particular key down/up (make/break)
-* sequence.
-*
-**/
+ *
+ * Uncomment the following if you want to
+ * test a particular key down/up (make/break)
+ * sequence.
+ *
+ **/
 
 // SHIFT + A Sequence
 // sequence = [
@@ -29,8 +28,6 @@ var fns = [];
 //   { key: 'A',     type: 'break', code: SCAN_CODES.getBreakCode('A')}
 // ];
 
-
-
 function onResponse(err) {
   if (err) {
     throw err;
@@ -38,10 +35,10 @@ function onResponse(err) {
 }
 
 function generateFunc(key, type, code) {
-  return function(cb) {
-    setTimeout(function() {
+  return function (cb) {
+    setTimeout(function () {
       console.info('Sending %s %s code', key, type);
-      virtualbox.keyboardputscancode(vm, code, function(err) {
+      virtualbox.keyboardputscancode(vm, code, function (err) {
         onResponse(err);
         cb();
       });
@@ -63,11 +60,9 @@ function addKeyFuncs(key) {
 }
 
 if (sequence) {
-
-  fns = sequence.map(function(s) {
+  fns = sequence.map(function (s) {
     return generateFunc(s.key, s.type, s.code);
   });
-
 } else if (key) {
   addKeyFuncs(key);
 } else {
@@ -79,6 +74,6 @@ if (sequence) {
   }
 }
 
-async.series(fns, function() {
+async.series(fns, function () {
   console.info('Keyboard Put Scan Code Test Complete');
 });
