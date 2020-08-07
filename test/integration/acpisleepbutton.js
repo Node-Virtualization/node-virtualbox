@@ -1,9 +1,9 @@
 'use strict';
 
-var virtualbox = require('../../lib/virtualbox'),
-  args = process.argv.slice(2);
+const virtualbox = require('../../lib/virtualbox'),
+  vmName = 'node-virtualbox-test-machine';
 
-virtualbox.acpisleepbutton(args[0], function (error) {
+virtualbox.acpisleepbutton(vmName, function (error) {
   if (error) {
     throw error;
   }

@@ -1,7 +1,7 @@
 'use strict';
 
 var virtualbox = require('../../lib/virtualbox'),
-  vm = process.argv.slice(2);
+  vm = 'node-virtualbox-test-machine';
 
 virtualbox.snapshotList(vm, function (
   error,

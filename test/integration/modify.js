@@ -1,9 +1,9 @@
 'use strict';
 
 var virtualbox = require('../../lib/virtualbox'),
-  args = process.argv.slice(2);
+  vmName = 'node-virtualbox-test-machine';
 
-virtualbox.modify(args[0], args[1], function (error) {
+virtualbox.modify(vmName, { memory: 64 }, function (error) {
   if (error) {
     throw error;
   }

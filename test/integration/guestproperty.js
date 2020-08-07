@@ -10,5 +10,6 @@ virtualbox.guestproperty.get(options, (error, stdout, _) => {
   if (error) {
     throw error;
   }
+  console.log(error, stdout, _);
   console.log(stdout);
 });

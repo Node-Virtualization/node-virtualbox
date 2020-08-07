@@ -1,10 +1,10 @@
 'use strict';
 
 var virtualbox = require('../../lib/virtualbox'),
-  vm = process.argv[2],
-  name = process.argv[3];
+  vmname = 'node-virtualbox-test-machine',
+  exportName = 'test-export';
 
-virtualbox.snapshotTake(vm, name, function (error, uuid) {
+virtualbox.snapshotTake(vmname, exportName, function (error, uuid) {
   if (error) {
     throw error;
   }

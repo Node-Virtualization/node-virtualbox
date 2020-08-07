@@ -2,7 +2,7 @@
 
 var util = require('util');
 var virtualbox = require('../../lib/virtualbox'),
-  args = process.argv.slice(2);
+  vmName = 'node-virtualbox-test-machine';
 
 virtualbox.list(function (list_data, error) {
   if (error) {

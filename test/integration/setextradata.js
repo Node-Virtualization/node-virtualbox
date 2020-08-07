@@ -1,20 +1,20 @@
 'use strict';
 
 var virtualbox = require('../../lib/virtualbox'),
-  args = process.argv.slice(2);
+  vmname = 'node-virtualbox-test-machine',
+  key = 'some_value',
+  value = 'kind of value';
 
-virtualbox.extradata.set(
-  { vm: args[0], key: args[1], value: args[2] },
-  function (error, value) {
-    if (error) {
-      throw error;
-    }
-
-    console.log(
-      'Set Virtual Machine "%s" extra "%s" value to "%s"',
-      args[0],
-      args[1],
-      args[2]
-    );
+virtualbox.extradata.set({ vmname, key, value }, function (error, result) {
+  if (error) {
+    throw error;
   }
-);
+
+  console.log(
+    'Set Virtual Machine "%s" extra "%s" value to "%s"; result is "%s"',
+    vmname,
+    key,
+    value,
+    result
+  );
+});

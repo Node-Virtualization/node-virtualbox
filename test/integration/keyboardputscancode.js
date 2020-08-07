@@ -3,7 +3,7 @@
 var virtualbox = require('../../lib/virtualbox'),
   async = require('async'),
   args = process.argv.slice(2),
-  vm = args[0],
+  vm = 'node-virtualbox-test-machine',
   key = args.length > 1 && args[1],
   delay = 250,
   sequence;
@@ -21,12 +21,12 @@ var fns = [];
  **/
 
 // SHIFT + A Sequence
-// sequence = [
-//   { key: 'SHIFT', type: 'make',  code: SCAN_CODES['SHIFT']},
-//   { key: 'A',     type: 'make',  code: SCAN_CODES['A']},
-//   { key: 'SHIFT', type: 'break', code: SCAN_CODES.getBreakCode('SHIFT')},
-//   { key: 'A',     type: 'break', code: SCAN_CODES.getBreakCode('A')}
-// ];
+sequence = [
+  { key: 'SHIFT', type: 'make', code: SCAN_CODES['SHIFT'] },
+  { key: 'A', type: 'make', code: SCAN_CODES['A'] },
+  { key: 'SHIFT', type: 'break', code: SCAN_CODES.getBreakCode('SHIFT') },
+  { key: 'A', type: 'break', code: SCAN_CODES.getBreakCode('A') },
+];
 
 function onResponse(err) {
   if (err) {

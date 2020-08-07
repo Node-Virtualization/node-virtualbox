@@ -1,19 +1,18 @@
 'use strict';
 
-var virtualbox = require('../../lib/virtualbox'),
-  args = process.argv.slice(2),
-  vm = args[0],
-  user = args[1],
-  pass = args[2],
-  ostype = virtualbox.guestproperty.os(vm),
-  path;
+const virtualbox = require('../../lib/virtualbox'),
+  vm = 'node-virtualbox-test-machine',
+  user = 'vagrant',
+  pass = 'vagrant',
+  ostype = virtualbox.guestproperty.os(vm);
+let path;
 
 if (ostype === 'windows') {
   path = 'C:\\Program Files\\Internet Explorer\\iexplore.exe';
 } else if (ostype === 'mac') {
   path = 'Safari.app';
 } else {
-  path = 'whoami';
+  path = 'ping';
 }
 
 virtualbox.start(vm, function () {
@@ -23,7 +22,7 @@ virtualbox.start(vm, function () {
       user: user,
       passwd: pass,
       path: path,
-      params: [args[1] || 'http://google.com'],
+      params: ['http://google.com'],
     },
     function (error, stdout) {
       if (error) {

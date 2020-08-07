@@ -1,7 +1,7 @@
 'use strict';
 
 var virtualbox = require('../../lib/virtualbox'),
-  args = process.argv.slice(2);
+  vmName = 'node-virtualbox-test-machine';
 
 virtualbox.extradata.get({ vm: args[0], key: args[1] }, function (
   error,

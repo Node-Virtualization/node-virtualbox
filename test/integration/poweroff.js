@@ -1,9 +1,9 @@
 'use strict';
 
 var virtualbox = require('../../lib/virtualbox'),
-  args = process.argv.slice(2);
+  vmName = 'node-virtualbox-test-machine';
 
-virtualbox.poweroff(args[0], function (error) {
+virtualbox.poweroff(vmName, function (error) {
   if (error) {
     throw error;
   }
