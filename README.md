@@ -9,23 +9,14 @@
 A JavaScript library to interact with [VirtualBox](https://www.virtualbox.org/) virtual machines.
 
 # Table of Contents
+
 - [Installation](#installation)
-- [Controlling Power and State](#controlling-power-and-state)
-	- [Starting a cold machine: Two ways](#starting-a-cold-machine-two-ways)
-	- [Stopping a machine](#stopping-a-machine)
-	- [Pausing, Saving and Resuming a machine](#pausing-saving-and-resuming-a-machine)
+- [Controlling Power and State](#controlling-power-and-state) - [Starting a cold machine: Two ways](#starting-a-cold-machine-two-ways) - [Stopping a machine](#stopping-a-machine) - [Pausing, Saving and Resuming a machine](#pausing-saving-and-resuming-a-machine)
 - [Export a Machine](#export-a-machine)
 - [Snapshot Manage](#snapshot-manage)
 - [Cloning a VM](#cloning-vms)
-- [Storage](#storage)
-	- [Manage the IDE controller](#manage-the-ide-controller)
-	- [Attach a disk image file](#attach-a-disk-image-file)
-- [Controlling the guest OS](#controlling-the-guest-os)
-	- [A note about security :warning:](#a-note-about-security)
-	- [Running programs in the guest](#running-programs-in-the-guest)
-		- [Executing commands as Administrators on Windows guests](#executing-commands-as-administrators-on-windows-guests)
-	- [Killing programs in the guest](#killing-programs-in-the-guest)
-	- [Sending keystrokes to a virtual machine](#sending-keystrokes-to-a-virtual-machine)
+- [Storage](#storage) - [Manage the IDE controller](#manage-the-ide-controller) - [Attach a disk image file](#attach-a-disk-image-file)
+- [Controlling the guest OS](#controlling-the-guest-os) - [A note about security :warning:](#a-note-about-security) - [Running programs in the guest](#running-programs-in-the-guest) - [Executing commands as Administrators on Windows guests](#executing-commands-as-administrators-on-windows-guests) - [Killing programs in the guest](#killing-programs-in-the-guest) - [Sending keystrokes to a virtual machine](#sending-keystrokes-to-a-virtual-machine)
 - [Meta information about machine](#meta-information-about-machine)
 - [Putting it all together](#putting-it-all-together)
 - [Available Methods](#available-methods)
@@ -33,6 +24,7 @@ A JavaScript library to interact with [VirtualBox](https://www.virtualbox.org/) 
 - [More Examples](#more-examples)
 - [License (MIT)](#license)
 - [Contributing](#contributing)
+  - [Testing](#testing)
 
 # Installation
 
@@ -63,18 +55,18 @@ Available API commands are listed at the end of this document.
 Virtual machines will _start headless by default_, but you can pass a boolean parameter to start them with a GUI:
 
 ```javascript
-virtualbox.start("machine_name", true, function start_callback(error) {
+virtualbox.start('machine_name', true, function start_callback(error) {
   if (error) throw error;
-  console.log("Virtual Machine has started WITH A GUI!");
+  console.log('Virtual Machine has started WITH A GUI!');
 });
 ```
 
 So as not to break pre-0.1.0 implementations, the old method still works (which also defaults to headless):
 
 ```javascript
-virtualbox.start("machine_name", function start_callback(error) {
+virtualbox.start('machine_name', function start_callback(error) {
   if (error) throw error;
-  console.log("Virtual Machine has started HEADLESS!");
+  console.log('Virtual Machine has started HEADLESS!');
 });
 ```
 
@@ -83,23 +75,23 @@ virtualbox.start("machine_name", function start_callback(error) {
 **Note:** For historical reasons, `.stop` is an alias to `.savestate`.
 
 ```javascript
-virtualbox.stop("machine_name", function stop_callback(error) {
+virtualbox.stop('machine_name', function stop_callback(error) {
   if (error) throw error;
-  console.log("Virtual Machine has been saved");
+  console.log('Virtual Machine has been saved');
 });
 ```
 
 To halt a machine completely, you can use `poweroff` or `acpipowerbutton`:
 
 ```javascript
-virtualbox.poweroff("machine_name", function poweroff_callback(error) {
+virtualbox.poweroff('machine_name', function poweroff_callback(error) {
   if (error) throw error;
-  console.log("Virtual Machine has been powered off!");
+  console.log('Virtual Machine has been powered off!');
 });
 ```
 
 ```javascript
-virtualbox.acpipowerbutton("machine_name", function acpipower_callback(error) {
+virtualbox.acpipowerbutton('machine_name', function acpipower_callback(error) {
   if (error) throw error;
   console.log("Virtual Machine's ACPI power button was pressed.");
 });
@@ -110,23 +102,23 @@ virtualbox.acpipowerbutton("machine_name", function acpipower_callback(error) {
 Noting the caveat above that `.stop` is actually an alias to `.savestate`...
 
 ```javascript
-virtualbox.pause("machine_name", function pause_callback(error) {
+virtualbox.pause('machine_name', function pause_callback(error) {
   if (error) throw error;
-  console.log("Virtual Machine is now paused!");
+  console.log('Virtual Machine is now paused!');
 });
 ```
 
 ```javascript
-virtualbox.savestate("machine_name", function save_callback(error) {
+virtualbox.savestate('machine_name', function save_callback(error) {
   if (error) throw error;
-  console.log("Virtual Machine is now paused!");
+  console.log('Virtual Machine is now paused!');
 });
 ```
 
 And, in the same family, `acpisleepbutton`:
 
 ```javascript
-virtualbox.acpisleepbutton("machine_name", function acpisleep_callback(error) {
+virtualbox.acpisleepbutton('machine_name', function acpisleep_callback(error) {
   if (error) throw error;
   console.log("Virtual Machine's ACPI sleep button signal was sent.");
 });
@@ -135,30 +127,29 @@ virtualbox.acpisleepbutton("machine_name", function acpisleep_callback(error) {
 Note that you should probably _resume_ a machine which is in one of the above three states.
 
 ```javascript
-virtualbox.resume("machine_name", function resume_callback(error) {
+virtualbox.resume('machine_name', function resume_callback(error) {
   if (error) throw error;
-  console.log("Virtual Machine is now paused!");
+  console.log('Virtual Machine is now paused!');
 });
 ```
 
 And, of course, a reset button method:
 
 ```javascript
-virtualbox.reset("machine_name", function reset_callback(error) {
+virtualbox.reset('machine_name', function reset_callback(error) {
   if (error) throw error;
   console.log("Virtual Machine's reset button was pressed!");
 });
 ```
-
 
 ## Export a machine
 
 You can export with `export` method:
 
 ```javascript
-virtualbox.export("machine_name", "output", function export_callback(error) {
-  if(error) throw error;
-  console.log("Virtual Machine was exported!");
+virtualbox.export('machine_name', 'output', function export_callback(error) {
+  if (error) throw error;
+  console.log('Virtual Machine was exported!');
 });
 ```
 
@@ -167,10 +158,17 @@ virtualbox.export("machine_name", "output", function export_callback(error) {
 You can show snapshot list with `snapshotList` method:
 
 ```javascript
-virtualbox.snapshotList("machine_name", function(error, snapshotList, currentSnapshotUUID) {
-  if(error) throw error;
-  if(snapshotList) {
-    console.log(JSON.stringify(snapshotList), JSON.stringify(currentSnapshotUUID));
+virtualbox.snapshotList('machine_name', function (
+  error,
+  snapshotList,
+  currentSnapshotUUID
+) {
+  if (error) throw error;
+  if (snapshotList) {
+    console.log(
+      JSON.stringify(snapshotList),
+      JSON.stringify(currentSnapshotUUID)
+    );
   }
 });
 ```
@@ -178,28 +176,31 @@ virtualbox.snapshotList("machine_name", function(error, snapshotList, currentSna
 And, you can take a snapshot:
 
 ```javascript
-virtualbox.snapshotTake("machine_name", "snapshot_name", function(error, uuid) {
+virtualbox.snapshotTake('machine_name', 'snapshot_name', function (
+  error,
+  uuid
+) {
   if (error) throw error;
-	console.log('Snapshot has been taken!');
-	console.log('UUID: ', uuid);
+  console.log('Snapshot has been taken!');
+  console.log('UUID: ', uuid);
 });
 ```
 
 Or, delete a snapshot:
 
 ```javascript
-virtualbox.snapshotDelete("machine_name", "snapshot_name", function(error) {
+virtualbox.snapshotDelete('machine_name', 'snapshot_name', function (error) {
   if (error) throw error;
-	console.log('Snapshot has been deleted!');
+  console.log('Snapshot has been deleted!');
 });
 ```
 
 Or, restore a snapshot:
 
 ```javascript
-virtualbox.snapshotRestore("machine_name", "snapshot_name", function(error) {
+virtualbox.snapshotRestore('machine_name', 'snapshot_name', function (error) {
   if (error) throw error;
-	console.log('Snapshot has been restored!');
+  console.log('Snapshot has been restored!');
 });
 ```
 
@@ -208,23 +209,31 @@ virtualbox.snapshotRestore("machine_name", "snapshot_name", function(error) {
 Make a full clone (duplicate virtual hard drive) of a machine:
 
 ```javascript
-virtualbox.clone("source_machine_name", "new_machine_name", function(error) {
+virtualbox.clone('source_machine_name', 'new_machine_name', function (error) {
   if (error) throw error;
-	console.log('Done fully cloning the virtual machine!');
+  console.log('Done fully cloning the virtual machine!');
 });
 ```
 
 Make a linked clone (interdependent-differentially stored virtual hard drive) of a machine:
 
 ```javascript
-virtualbox.snapshotTake("machine_name", "snapshot_name", function(error, uuid) {
+virtualbox.snapshotTake('machine_name', 'snapshot_name', function (
+  error,
+  uuid
+) {
   if (error) throw error;
-	console.log('Snapshot has been taken!');
-	console.log('UUID: ', uuid);
-	virtualbox.clone("machine_name", "new_machine_name", "snapshot_name", function(error) {
-  		if (error) throw error;
-		console.log('Done making a linked clone of the virtual machine!');
-	});
+  console.log('Snapshot has been taken!');
+  console.log('UUID: ', uuid);
+  virtualbox.clone(
+    'machine_name',
+    'new_machine_name',
+    'snapshot_name',
+    function (error) {
+      if (error) throw error;
+      console.log('Done making a linked clone of the virtual machine!');
+    }
+  );
 });
 ```
 
@@ -235,13 +244,16 @@ virtualbox.snapshotTake("machine_name", "snapshot_name", function(error, uuid) {
 In case the VM doesn't have an IDE controller you can use the storagectl command to add one:
 
 ```javascript
-virtualbox.storage.addCtl({
-	vm: "machine_name",
-	perhiperal_name: "IDE", //optional
-	type: "ide" //optional
-}, function(){
-	console.log('Controller has been added!');
-})
+virtualbox.storage.addCtl(
+  {
+    vm: 'machine_name',
+    perhiperal_name: 'IDE', //optional
+    type: 'ide', //optional
+  },
+  function () {
+    console.log('Controller has been added!');
+  }
+);
 ```
 
 ### Attach a disk image file
@@ -249,16 +261,19 @@ virtualbox.storage.addCtl({
 Mount an ISO file to the added controller:
 
 ```javascript
-virtualbox.storage.attach({
-	vm: "machine_name",
-	perhiperal_name: "IDE", //optional
-	port: "0", //optional
-	device: "0", //optional
-	type: "dvddrive", //optional
-	medium: "X:\Folder\containing\the.iso"
-}, function(){
-	console.log('Image has been mounted!');
-})
+virtualbox.storage.attach(
+  {
+    vm: 'machine_name',
+    perhiperal_name: 'IDE', //optional
+    port: '0', //optional
+    device: '0', //optional
+    type: 'dvddrive', //optional
+    medium: 'X:Foldercontaining\the.iso',
+  },
+  function () {
+    console.log('Image has been mounted!');
+  }
+);
 ```
 
 The _medium_ parameter of the options object can be set to the **none** value to unmount.
@@ -281,14 +296,14 @@ This method takes an options object with the name of the virtual machine, the pa
 
 ```javascript
 var options = {
-  vm: "machine_name",
-  cmd: "C:\\Program Files\\Internet Explorer\\iexplore.exe",
-  params: "https://google.com"
-}
+  vm: 'machine_name',
+  cmd: 'C:\\Program Files\\Internet Explorer\\iexplore.exe',
+  params: 'https://google.com',
+};
 
 virtualbox.exec(options, function exec_callback(error, stdout) {
-    if (error) throw error;
-    console.log('Started Internet Explorer...');
+  if (error) throw error;
+  console.log('Started Internet Explorer...');
 });
 ```
 
@@ -298,11 +313,11 @@ Pass username and password information in an `options` object:
 
 ```javascript
 var options = {
-  vm: "machine_name",
-  user:"Administrator",
-  password: "123456",
-  cmd: "C:\\Program Files\\Internet Explorer\\iexplore.exe",
-  params: "https://google.com"
+  vm: 'machine_name',
+  user: 'Administrator',
+  password: '123456',
+  cmd: 'C:\\Program Files\\Internet Explorer\\iexplore.exe',
+  params: 'https://google.com',
 };
 ```
 
@@ -311,13 +326,16 @@ var options = {
 Tasks can be killed in the guest as well. In Windows guests this calls `taskkill.exe /im` and on Linux, BSD and OS X (Darwin) guests, it calls `sudo killall`:
 
 ```javascript
-virtualbox.kill({
-    vm: "machine_name",
-    cmd: "iexplore.exe"
-}, function kill_callback(error) {
+virtualbox.kill(
+  {
+    vm: 'machine_name',
+    cmd: 'iexplore.exe',
+  },
+  function kill_callback(error) {
     if (error) throw error;
     console.log('Terminated Internet Explorer.');
-});
+  }
+);
 ```
 
 ## Sending keystrokes to a virtual machine
@@ -327,16 +345,20 @@ Keyboard scan code sequences can be piped directly to a virtual machine's consol
 ```javascript
 var SCAN_CODES = virtualbox.SCAN_CODES;
 var sequence = [
-  { key: 'SHIFT', type: 'make',  code: SCAN_CODES['SHIFT']},
-  { key: 'A',     type: 'make',  code: SCAN_CODES['A']},
-  { key: 'SHIFT', type: 'break', code: SCAN_CODES.getBreakCode('SHIFT')},
-  { key: 'A',     type: 'break', code: SCAN_CODES.getBreakCode('A')}
+  { key: 'SHIFT', type: 'make', code: SCAN_CODES['SHIFT'] },
+  { key: 'A', type: 'make', code: SCAN_CODES['A'] },
+  { key: 'SHIFT', type: 'break', code: SCAN_CODES.getBreakCode('SHIFT') },
+  { key: 'A', type: 'break', code: SCAN_CODES.getBreakCode('A') },
 ];
 
-virtualbox.keyboardputscancode("machine_name", sequence, function keyscan_callback(err) {
+virtualbox.keyboardputscancode(
+  'machine_name',
+  sequence,
+  function keyscan_callback(err) {
     if (error) throw error;
     console.log('Sent SHIFT A');
-});
+  }
+);
 ```
 
 # Meta information about machine
@@ -354,9 +376,9 @@ Obtaining a guest property by [key name](https://www.virtualbox.org/manual/ch04.
 
 ```javascript
 var options = {
-  vm: "machine_name",
-  key: "/VirtualBox/GuestInfo/Net/0/V4/IP"
-}
+  vm: 'machine_name',
+  key: '/VirtualBox/GuestInfo/Net/0/V4/IP',
+};
 
 virtualbox.guestproperty.get(function guestproperty_callback(machines, error) {
   if (error) throw error;
@@ -368,13 +390,18 @@ Obtaining an extra property by key name:
 
 ```javascript
 var options = {
-  vm: "machine_name",
-  key: "GUI/Fullscreen"
-}
+  vm: 'machine_name',
+  key: 'GUI/Fullscreen',
+};
 
 virtualbox.extradata.get(options, function extradataget_callback(error, value) {
   if (error) throw error;
-  console.log('Virtual Machine "%s" extra "%s" value is "%s"', options.vm, options.key, value);
+  console.log(
+    'Virtual Machine "%s" extra "%s" value is "%s"',
+    options.vm,
+    options.key,
+    value
+  );
 });
 ```
 
@@ -382,14 +409,19 @@ Writing an extra property by key name:
 
 ```javascript
 var options = {
-  vm: "machine_name",
-  key: "GUI/Fullscreen",
-  value: "true"
-}
+  vm: 'machine_name',
+  key: 'GUI/Fullscreen',
+  value: 'true',
+};
 
 virtualbox.extradata.set(options, function extradataset_callback(error) {
   if (error) throw error;
-  console.log('Set Virtual Machine "%s" extra "%s" value to "%s"', options.vm, options.key, options.value);
+  console.log(
+    'Set Virtual Machine "%s" extra "%s" value to "%s"',
+    options.vm,
+    options.key,
+    options.value
+  );
 });
 ```
 
@@ -400,23 +432,22 @@ _Note: some properties are only available/effective if the Guest OS has the (htt
 ```javascript
 var virtualbox = require('virtualbox');
 
-virtualbox.start("machine_name", function start_callback(error) {
+virtualbox.start('machine_name', function start_callback(error) {
+  if (error) throw error;
 
-    if (error) throw error;
+  console.log('VM "w7" has been successfully started');
 
-    console.log('VM "w7" has been successfully started');
-
-    virtualbox.exec({
-        vm: "machine_name",
-        cmd: "C:\\Program Files\\Internet Explorer\\iexplore.exe",
-        params: "http://google.com"
-    }, function (error) {
-
-        if (error) throw error;
-        console.log('Running Internet Explorer...');
-
-    });
-
+  virtualbox.exec(
+    {
+      vm: 'machine_name',
+      cmd: 'C:\\Program Files\\Internet Explorer\\iexplore.exe',
+      params: 'http://google.com',
+    },
+    function (error) {
+      if (error) throw error;
+      console.log('Running Internet Explorer...');
+    }
+  );
 });
 ```
 
@@ -442,7 +473,7 @@ virtualbox.start("machine_name", function start_callback(error) {
 - `.list(callback)`
 - `.isRunning({vm:"machine_name"}, callback)`
 - `.snapshotList({vm:"machine_name"}, callback)`
-- `.snapshotTake({vm:"machine_name"}, {vm:"snapshot_name"},  callback)`
+- `.snapshotTake({vm:"machine_name"}, {vm:"snapshot_name"}, callback)`
 - `.snapshotDelete({vm:"machine_name"}, {vm:"snapshot_UUID"}, callback)`
 - `.snapshotRestore({vm:"machine_name"}, {vm:"snapshot_UUID"}, callback)`
 - `.clone({vm:"machine_name"}, {vm:"new_machine_name"}, callback)`
@@ -475,3 +506,7 @@ Please do!
 - [Fork](https://github.com/Node-Virtualization/node-virtualbox#fork-destination-box) and send a pull request.
 
 Please abide by the [Contributor Code of Conduct](https://github.com/Node-Virtualization/node-virtualbox/blob/master/code_of_conduct.md).
+
+## Testing
+
+We currently do not have a complete unit testing suite. However, example scripts and a Vagrantfile are provided. Test your changes by writing a new script and/or running through all the test scripts to make sure they behave as expected. To do this [install vagrant](https://www.vagrantup.com/docs/installation) and run `vagrant up` in this repository's root directory. Then run the example scripts by using node: `node test/integration/<script-name>.js`. Please be ready to provide test output upon opening a pull request.
