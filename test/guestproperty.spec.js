@@ -1,5 +1,6 @@
 'use strict';
 
+const { logger } = require('./helpers/logger');
 const { create } = require('../lib/virtualbox');
 
 describe('Virtualbox#guestproperty', () => {
@@ -25,10 +26,7 @@ describe('Virtualbox#guestproperty', () => {
           })
         )
       );
-    const virtualbox = create(
-      { categories: { default: { appenders: ['out'], level: 'debug' } } },
-      executor
-    );
+    const virtualbox = create(logger, executor);
     virtualbox.guestproperty.get(
       { vm: 'testmachine', key: 'someProperty' },
       function (value) {
@@ -69,10 +67,7 @@ describe('Virtualbox#guestproperty', () => {
           })
         )
       );
-    const virtualbox = create(
-      { categories: { default: { appenders: ['out'], level: 'debug' } } },
-      executor
-    );
+    const virtualbox = create(logger, executor);
     virtualbox.guestproperty.get(
       { vm: 'testmachine', key: 'someProperty' },
       function (value) {
