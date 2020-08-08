@@ -3,7 +3,7 @@
 var virtualbox = require('../../lib/virtualbox'),
   vmName = 'node-virtualbox-test-machine';
 
-virtualbox.export(args[0], args[1], function (error) {
+virtualbox.export(vmName, 'test-export', function (error) {
   if (error) {
     throw error;
   }
