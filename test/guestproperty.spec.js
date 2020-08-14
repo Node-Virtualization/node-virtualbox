@@ -1,23 +1,32 @@
 'use strict';
 
-const virtualbox = require('../lib/virtualbox'),
-  args = process.argv.slice(2);
-
-jest.mock('child_process');
+const { logger } = require('./helpers/logger');
+const { create } = require('../lib/virtualbox');
 
 describe('Virtualbox#guestproperty', () => {
-  afterEach(() => {
-    virtualbox.guestproperty.os_type = null;
-  });
   it('should not throw an error when getting a guest property with ostype of MacOS', (done) => {
-    const { execFile } = require('child_process');
-    execFile
-      .mockImplementationOnce((_, __, callback) => {
-        callback(null, 'ostype="MacOS', '');
-      })
-      .mockImplementationOnce((_, __, callback) => {
-        callback(null, 'somevalue', '');
-      });
+    const executor = jest
+      .fn()
+      .mockReturnValueOnce(
+        new Promise((resolve) =>
+          resolve({ err: null, stdout: 'somevalue', stderr: '' })
+        )
+      )
+      .mockReturnValueOnce(
+        new Promise((resolve) =>
+          resolve({ err: null, stdout: 'ostype="MacOS', stderr: '' })
+        )
+      )
+      .mockReturnValueOnce(
+        new Promise((resolve) =>
+          resolve({
+            err: null,
+            stdout: 'somevalue',
+            stderr: '',
+          })
+        )
+      );
+    const virtualbox = create(logger, executor);
     virtualbox.guestproperty.get(
       { vm: 'testmachine', key: 'someProperty' },
       function (value) {
@@ -29,14 +38,36 @@ describe('Virtualbox#guestproperty', () => {
   });
 
   it('should not throw an error when getting a guest property with ostype of Mac OS machine', (done) => {
-    const { execFile } = require('child_process');
-    execFile
-      .mockImplementationOnce((_, __, callback) => {
-        callback(null, 'ostype="Mac OS machine', '');
-      })
-      .mockImplementationOnce((_, __, callback) => {
-        callback(null, 'somevalue', '');
-      });
+    const executor = jest
+      .fn()
+      .mockReturnValueOnce(
+        new Promise((resolve) =>
+          resolve({
+            err: null,
+            stdout: 'somevalue',
+            stderr: '',
+          })
+        )
+      )
+      .mockReturnValueOnce(
+        new Promise((resolve) =>
+          resolve({
+            err: null,
+            stdout: 'ostype="Mac OS machine',
+            stderr: '',
+          })
+        )
+      )
+      .mockReturnValueOnce(
+        new Promise((resolve) =>
+          resolve({
+            err: null,
+            stdout: 'somevalue',
+            stderr: '',
+          })
+        )
+      );
+    const virtualbox = create(logger, executor);
     virtualbox.guestproperty.get(
       { vm: 'testmachine', key: 'someProperty' },
       function (value) {

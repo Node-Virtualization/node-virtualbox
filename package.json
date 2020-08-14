@@ -1,6 +1,6 @@
 {
   "name": "virtualbox",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "A library to interact with VirtualBox.",
   "author": "Azer Koculu <azer@kodfabrik.com>",
   "license": "MIT",
@@ -71,7 +71,7 @@
   "devDependencies": {
     "async": "^2.1.4",
     "jest": "^26.0.1",
-    "jshint": "^2.10.2"
+    "jshint": "^2.12.0"
   },
   "engines": {
     "engine": "node >= 0.4.1"
