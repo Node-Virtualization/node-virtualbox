@@ -12,6 +12,7 @@ A JavaScript library to interact with [VirtualBox](https://www.virtualbox.org/) 
 
 - [Installation](#installation)
 - [Controlling Power and State](#controlling-power-and-state) - [Starting a cold machine: Two ways](#starting-a-cold-machine-two-ways) - [Stopping a machine](#stopping-a-machine) - [Pausing, Saving and Resuming a machine](#pausing-saving-and-resuming-a-machine)
+- [import a Machine](#import-a-machine)
 - [Export a Machine](#export-a-machine)
 - [Snapshot Manage](#snapshot-manage)
 - [Cloning a VM](#cloning-vms)
@@ -141,6 +142,22 @@ virtualbox.reset('machine_name', function reset_callback(error) {
   console.log("Virtual Machine's reset button was pressed!");
 });
 ```
+
+## Import a machine
+
+You can import an OVA or OVF file with the `import` method:
+
+```javascript
+virtualbox.import('ova_file_path', options, function import_callback(error) {
+  if (error) throw error;
+  console.log('Virtual Machine was imported!');
+});
+```
+
+The options object may contain optional parameters:
+* `vmname`: the name of the new VM.
+* `cpus`: the number of CPUs.
+* `memory`: the amount of memory in megabytes.
 
 ## Export a machine
 
