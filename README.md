@@ -12,7 +12,7 @@ A JavaScript library to interact with [VirtualBox](https://www.virtualbox.org/) 
 
 - [Installation](#installation)
 - [Controlling Power and State](#controlling-power-and-state) - [Starting a cold machine: Two ways](#starting-a-cold-machine-two-ways) - [Stopping a machine](#stopping-a-machine) - [Pausing, Saving and Resuming a machine](#pausing-saving-and-resuming-a-machine)
-- [import a Machine](#import-a-machine)
+- [Import a Machine](#import-a-machine)
 - [Export a Machine](#export-a-machine)
 - [Snapshot Manage](#snapshot-manage)
 - [Cloning a VM](#cloning-vms)
@@ -145,10 +145,10 @@ virtualbox.reset('machine_name', function reset_callback(error) {
 
 ## Import a machine
 
-You can import an OVA or OVF file with the `import` method:
+You can import an OVA or OVF file with the `vmImport` method:
 
 ```javascript
-virtualbox.import('ova_file_path', options, function import_callback(error) {
+virtualbox.vmImport('ova_file_path', options, function import_callback(error) {
   if (error) throw error;
   console.log('Virtual Machine was imported!');
 });
@@ -161,10 +161,10 @@ The options object may contain optional parameters:
 
 ## Export a machine
 
-You can export with `export` method:
+You can export with `vmExport` method:
 
 ```javascript
-virtualbox.export('machine_name', 'output', function export_callback(error) {
+virtualbox.vmExport('machine_name', 'output', function export_callback(error) {
   if (error) throw error;
   console.log('Virtual Machine was exported!');
 });
@@ -478,7 +478,8 @@ virtualbox.start('machine_name', function start_callback(error) {
 - `.start({vm:"machine_name"}, callback)` and `.start({vm:"machine_name"}, true, callback)`
 - `.stop({vm:"machine_name"}, callback)`
 - `.savestate({vm:"machine_name"}, callback)`
-- `.export({vm:"machine_name"}, {output: "output"}, callback)`
+- `.vmImport({input: "input"}, {options: "options"}, callback)`
+- `.vmExport({vm:"machine_name"}, {output: "output"}, callback)`
 - `.poweroff({vm:"machine_name"}, callback)`
 - `.acpisleepbutton({vm:"machine_name"}, callback)`
 - `.acpipowerbutton({vm:"machine_name"}, callback)`
