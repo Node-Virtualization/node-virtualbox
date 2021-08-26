@@ -397,7 +397,7 @@ var options = {
   key: '/VirtualBox/GuestInfo/Net/0/V4/IP',
 };
 
-virtualbox.guestproperty.get(function guestproperty_callback(machines, error) {
+virtualbox.guestproperty.get(options, function guestproperty_callback(machines, error) {
   if (error) throw error;
   // Act on machines
 });
