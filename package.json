@@ -69,7 +69,7 @@
     "log4js": "^4.0.2"
   },
   "devDependencies": {
-    "async": "^2.1.4",
+    "async": "^3.2.2",
     "jest": "^26.0.1",
     "jshint": "^2.12.0"
   },
