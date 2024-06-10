@@ -74,7 +74,7 @@
     "prettier": "^3.2.5"
   },
   "engines": {
-    "engine": "node >= 0.4.1"
+    "engine": "node >= 18"
   },
   "dependencies": {
     "log4js": "^6.9.1"
