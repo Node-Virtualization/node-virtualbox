@@ -9,5 +9,5 @@ virtualbox.snapshotRestore(vm, uuid, function (error) {
     throw error;
   }
 
-  console.log('Virtual machine has been restored');
+  virtualbox._logging.log('Virtual machine has been restored');
 });

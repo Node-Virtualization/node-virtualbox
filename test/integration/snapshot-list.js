@@ -13,7 +13,7 @@ virtualbox.snapshotList(vm, function (
   }
 
   if (snapshotList) {
-    console.log(
+    virtualbox._logging.log(
       JSON.stringify(snapshotList),
       JSON.stringify(currentSnapshotUUID)
     );

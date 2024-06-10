@@ -58,22 +58,24 @@
   },
   "scripts": {
     "test": "jest ./test/*.spec.js",
-    "lint": "jshint ./lib ./test"
+    "lint": "eslint ./lib ./test"
   },
   "main": "./lib/virtualbox",
   "repository": {
     "type": "git",
     "url": "https://github.com/Node-Virtualization/node-virtualbox.git"
   },
-  "dependencies": {
-    "log4js": "^4.0.2"
-  },
   "devDependencies": {
-    "async": "^2.1.4",
+    "async": "^3.2.5",
+    "eslint": "^8.57.0",
     "jest": "^26.0.1",
-    "jshint": "^2.12.0"
+    "jsdoc": "^4.0.2",
+    "prettier": "^3.2.5"
   },
   "engines": {
-    "engine": "node >= 0.4.1"
+    "engine": "node >= 18"
+  },
+  "dependencies": {
+    "log4js": "^6.9.1"
   }
 }

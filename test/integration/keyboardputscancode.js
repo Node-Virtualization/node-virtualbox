@@ -1,9 +1,10 @@
-'use strict';
+"use strict";
 
-var virtualbox = require('../../lib/virtualbox'),
-  async = require('async'),
+var virtualbox = require("../../lib/virtualbox"),
+  { logger } = require("../helpers/logger"),
+  async = require("async"),
   args = process.argv.slice(2),
-  vm = 'node-virtualbox-test-machine',
+  vm = "node-virtualbox-test-machine",
   key = args.length > 1 && args[1],
   delay = 250,
   sequence;
@@ -22,10 +23,10 @@ var fns = [];
 
 // SHIFT + A Sequence
 sequence = [
-  { key: 'SHIFT', type: 'make', code: SCAN_CODES['SHIFT'] },
-  { key: 'A', type: 'make', code: SCAN_CODES['A'] },
-  { key: 'SHIFT', type: 'break', code: SCAN_CODES.getBreakCode('SHIFT') },
-  { key: 'A', type: 'break', code: SCAN_CODES.getBreakCode('A') },
+  { key: "SHIFT", type: "make", code: SCAN_CODES["SHIFT"] },
+  { key: "A", type: "make", code: SCAN_CODES["A"] },
+  { key: "SHIFT", type: "break", code: SCAN_CODES.getBreakCode("SHIFT") },
+  { key: "A", type: "break", code: SCAN_CODES.getBreakCode("A") },
 ];
 
 function onResponse(err) {
@@ -37,7 +38,7 @@ function onResponse(err) {
 function generateFunc(key, type, code) {
   return function (cb) {
     setTimeout(function () {
-      console.info('Sending %s %s code', key, type);
+      logger.info("Sending %s %s code", key, type);
       virtualbox.keyboardputscancode(vm, code, function (err) {
         onResponse(err);
         cb();
@@ -51,10 +52,10 @@ function addKeyFuncs(key) {
   var breakCode = SCAN_CODES.getBreakCode(key);
 
   if (makeCode && makeCode.length) {
-    fns.push(generateFunc(key, 'make', makeCode));
+    fns.push(generateFunc(key, "make", makeCode));
 
     if (breakCode && breakCode.length) {
-      fns.push(generateFunc(key, 'break', breakCode));
+      fns.push(generateFunc(key, "break", breakCode));
     }
   }
 }
@@ -66,8 +67,8 @@ if (sequence) {
 } else if (key) {
   addKeyFuncs(key);
 } else {
-  for (var key in SCAN_CODES) {
-    if (key === 'getBreakCode') {
+  for (var codeKey in SCAN_CODES) {
+    if (codeKey === "getBreakCode") {
       continue;
     }
     addKeyFuncs(key);
@@ -75,5 +76,5 @@ if (sequence) {
 }
 
 async.series(fns, function () {
-  console.info('Keyboard Put Scan Code Test Complete');
+  logger.info("Keyboard Put Scan Code Test Complete");
 });

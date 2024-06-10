@@ -1,0 +1,28 @@
+# GitHub Actions (.github/workflows/main.yml)
+name: Node.js CI
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ["22", "21", "20", "19", "18"]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install project dependencies
+        run: npm install
+      - name: Run tests
+        run: npm test
+      - name: Run linting
+        run: npm run lint
