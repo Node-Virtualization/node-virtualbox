@@ -1,8 +1,9 @@
-'use strict';
+"use strict";
 
-const virtualbox = require('../../lib/virtualbox'),
-  vm = 'node-virtualbox-test-machine';
+const virtualbox = require("../../lib/virtualbox"),
+  { logger } = require("../helpers/logger"),
+  vm = "node-virtualbox-test-machine";
 
 virtualbox.guestproperty.enumerate(vm, (err, arr) => {
-  console.log(arr);
+  logger.debug(arr);
 });

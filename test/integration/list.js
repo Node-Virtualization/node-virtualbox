@@ -10,7 +10,7 @@ virtualbox.list(function (list_data, error) {
   }
 
   if (list_data) {
-    console.log(util.inspect(list_data));
-    //console.log(list_data);
+    logger.log(util.inspect(list_data));
+    //logger.log(list_data);
   }
 });
