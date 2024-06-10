@@ -67,8 +67,8 @@ if (sequence) {
 } else if (key) {
   addKeyFuncs(key);
 } else {
-  for (var key in SCAN_CODES) {
-    if (key === "getBreakCode") {
+  for (var codeKey in SCAN_CODES) {
+    if (codeKey === "getBreakCode") {
       continue;
     }
     addKeyFuncs(key);

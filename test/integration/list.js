@@ -1,8 +1,7 @@
 'use strict';
 
 var util = require('util');
-var virtualbox = require('../../lib/virtualbox'),
-  vmName = 'node-virtualbox-test-machine';
+var virtualbox = require('../../lib/virtualbox');
 
 virtualbox.list(function (list_data, error) {
   if (error) {
@@ -10,7 +9,7 @@ virtualbox.list(function (list_data, error) {
   }
 
   if (list_data) {
-    logger.log(util.inspect(list_data));
+    virtualbox._logging.log(util.inspect(list_data));
     //logger.log(list_data);
   }
 });

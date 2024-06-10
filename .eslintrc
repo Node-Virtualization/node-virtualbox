@@ -72,7 +72,7 @@
 
 {
   "parserOptions": {
-    "ecmaVersion": 6,
+    "ecmaVersion": 2018,
   },
   "env": {
     "browser": true,
@@ -100,7 +100,12 @@
     "no-undef": "error",
     "no-redeclare": "error",
     "no-caller": "error",
-    "no-unused-vars": "error",
+    "no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "_",
+      },
+    ],
     "no-empty": "off",
     "no-new": "off",
     "no-underscore-dangle": "off",

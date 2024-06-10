@@ -10,7 +10,7 @@ virtualbox.extradata.set({ vmname, key, value }, function (error, result) {
     throw error;
   }
 
-  logger.log(
+  virtualbox._logging.log(
     'Set Virtual Machine "%s" extra "%s" value to "%s"; result is "%s"',
     vmname,
     key,

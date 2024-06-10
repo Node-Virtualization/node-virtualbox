@@ -9,6 +9,6 @@ virtualbox.snapshotTake(vmname, exportName, function (error, uuid) {
     throw error;
   }
   if (uuid) {
-    logger.log('UUID: ' + uuid);
+    virtualbox._logging.log('UUID: ' + uuid);
   }
 });
