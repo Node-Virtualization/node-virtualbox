@@ -1,10 +1,10 @@
 # GitHub Actions (.github/workflows/main.yml)
 name: Node.js CI
 on:
-  - pull_request:
+  pull_request:
     branches:
       - main
-  - workflow_dispatch
+  workflow_dispatch:
 
 jobs:
   build:
